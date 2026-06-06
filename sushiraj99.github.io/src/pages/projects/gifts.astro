@@ -1,0 +1,170 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const gifts = (await getCollection('gifts')).sort((a, b) => {
+  const aDate = a.data.date?.valueOf() ?? 0;
+  const bDate = b.data.date?.valueOf() ?? 0;
+  return bDate - aDate;
+});
+---
+
+<BaseLayout
+  title="Favorite Gifts"
+  description="A collection of my favorite handmade gifts."
+>
+  <div class="page-header">
+    <a href="/projects" class="back-link">← Projects</a>
+    <h1>Favorite Gifts</h1>
+  </div>
+
+  <p class="intro">
+    If you've ever seen my
+    <a href="https://www.etsy.com/shop/madewithanbu" target="_blank" rel="noopener">Etsy</a> or
+    <a href="https://www.instagram.com/stuffbysushi/" target="_blank" rel="noopener">Instagram</a>,
+    you'll probably notice it's a little&hellip; well, sparse. I'm hoping now that I'm done
+    with school I'll be able to put more time into that. Most of the things I make are
+    usually presents for friends and family, since handmade gifts always seem to hit.
+    Also because I'm the worst and will remember that I need to figure out a present
+    like a day before a big event &mdash; oops. Here are some of my favorites I've made.
+  </p>
+
+  <div class="gifts-grid">
+    {gifts.map(gift => (
+      <article class="gift-card">
+        {gift.data.images && gift.data.images.length > 0 && (
+          <div class:list={['gift-card__imgs', { 'gift-card__imgs--multi': gift.data.images.length > 1 }]}>
+            {gift.data.images.map((src, i) => (
+              <div class="gift-card__img-wrap">
+                <img src={src} alt={`${gift.data.title} ${i + 1}`} />
+              </div>
+            ))}
+          </div>
+        )}
+        <div class="gift-card__body">
+          <h3>{gift.data.title}</h3>
+          <p>{gift.data.description}</p>
+          {gift.data.tools && gift.data.tools.length > 0 && (
+            <div class="gift-card__tools">
+              {gift.data.tools.map(t => <span>{t}</span>)}
+            </div>
+          )}
+        </div>
+      </article>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: color 0.15s;
+  }
+
+  .back-link:hover { color: var(--accent); }
+
+  .intro {
+    font-size: 1.0625rem;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 58ch;
+    margin-bottom: 3rem;
+  }
+
+  /* ── Grid ── */
+  .gifts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 520px) {
+    .gifts-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Card ── */
+  .gift-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card-bg);
+    transition: border-color 0.15s;
+  }
+
+  .gift-card:hover { border-color: var(--accent); }
+
+  .gift-card__imgs {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .gift-card__imgs--multi {
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .gift-card__img-wrap {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .gift-card__imgs--multi .gift-card__img-wrap {
+    aspect-ratio: 1 / 1;
+  }
+
+  .gift-card__img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .gift-card:hover .gift-card__img-wrap img {
+    transform: scale(1.03);
+  }
+
+  .gift-card__body {
+    padding: 1.125rem 1.25rem;
+  }
+
+  .gift-card__body h3 {
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.4rem;
+  }
+
+  .gift-card__body p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .gift-card__tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.75rem;
+  }
+
+  .gift-card__tools span {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.15em 0.5em;
+  }
+</style>

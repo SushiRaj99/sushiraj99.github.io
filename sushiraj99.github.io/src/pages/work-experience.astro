@@ -1,0 +1,342 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Work Experience"
+  description="Work experience, education, and skills of Sushant Raj."
+>
+  <div class="page-header">
+    <h1>Work Experience</h1>
+    <a href="/resume.pdf" download class="download-btn">Download PDF ↓</a>
+  </div>
+
+  <!-- ── Work Experience ── -->
+  <section class="resume-section">
+    <div class="employer">
+      <div class="employer-header">
+        <h2>Locus Robotics</h2>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <span class="role-title">Senior Robotics Integration Engineer</span>
+          <span class="role-dates">Aug 2025 – Present</span>
+        </div>
+        <ul>
+          <li>Contribute to R&D of prototype robots aimed at improving efficiency in logistics and fulfillment applications</li>
+          <li>Develop and integrate core systems across the robot software stack</li>
+          <li>Support experimentation with novel hardware/software integrations to expand robotic capabilities and enable new fulfillment workflows</li>
+          <li>Lead development and deployment on key components and infrastructure for the Array platform.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <span class="role-title">Robotics Software Engineer — Perception Team</span>
+          <span class="role-dates">Jul 2023 – Aug 2025</span>
+        </div>
+        <ul>
+          <li>Supported integration and filtering of diverse sensors and accessories (lidars, depth cameras, RGB cameras, conveyors) to enhance robot perception and enable different use cases across Locus robots</li>
+          <li>Created remote diagnostics tools to streamline sensor hardware debugging, reducing the need for on-site resources</li>
+          <li>Supported development and bring-up for new robot platforms (Vector 1.2, Vector 2.0, and Array)</li>
+          <li>Collaborated with planning &amp; controls teams to interface the perception pipeline with other robot components</li>
+          <li>Built a model performance tracking &amp; testing system for the Perception team's ML models to provide insight into feature performance over time</li>
+          <li>Developed and implemented an improved depth camera ground segmentation pipeline to enhance obstacle detection and avoidance</li>
+          <li>Implemented sensor filter pipeline performance and latency tracking tools; used VTune to identify and resolve inefficiencies</li>
+          <li>Implemented a lightweight layer to help robots avoid tall obstacles that slip out of sensor field of view</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <span class="role-title">Robotics Software Engineer</span>
+          <span class="role-dates">Jun 2022 – Jul 2023</span>
+        </div>
+        <ul>
+          <li>Supported new deployments (remote and on-site) of Locus Vectors into customer sites; developed functions to integrate the Vector system with the Waypoint Dispatcher interface</li>
+          <li>Supported development and deployment of tools for new use cases, including cart detection systems and robots with fixed carts</li>
+          <li>Co-developed an embedded system tester for Locus' contract manufacturer; responsible for software communicating with the embedded board and running verification tests</li>
+          <li>Improved 3D lidar filtering to detect and avoid smaller obstacles</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <span class="role-title">Robotics Engineering Intern</span>
+          <span class="role-dates">Oct 2021 – Jun 2022</span>
+        </div>
+        <ul>
+          <li>Helped integrate a manipulator onto the existing robot platform, including UI commands for the manipulator</li>
+          <li>Built a standalone visualization application for robots using the Mass Robotics Interoperability Standard and implemented support on Waypoint robots</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="employer">
+      <div class="employer-header">
+        <h2>Waypoint Robotics</h2>
+        <span class="employer-dates">Jul 2018 – Oct 2021</span>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <span class="role-title">Robotics Intern</span>
+        </div>
+        <ul>
+          <li>Utilized MongoDB to streamline usage of additional products such as wireless charging docks, alignment markers, and carts</li>
+          <li>Managed and fulfilled feature requests to fix bugs and add functions to the user interface</li>
+          <li>Built a web-based visualization application to display sensor data</li>
+          <li>Completed projects including robot scheduling functions, a torque-based safety feature, and GPS integration</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Education ── -->
+  <section class="resume-section">
+    <h2 class="section-label">Education</h2>
+
+    <div class="edu-entry">
+      <div class="edu-header">
+        <span class="edu-school">Worcester Polytechnic Institute</span>
+        <span class="edu-dates">May 2026</span>
+      </div>
+      <p class="edu-degree">Master of Science, Robotics Engineering</p>
+    </div>
+
+    <div class="edu-entry">
+      <div class="edu-header">
+        <span class="edu-school">University of Connecticut — Honors College, STEM Scholar</span>
+        <span class="edu-dates">May 2022</span>
+      </div>
+      <p class="edu-degree">Bachelor of Science, Electrical Engineering &amp; Computer Engineering · Minor: Mathematics</p>
+    </div>
+  </section>
+
+  <!-- ── Skills ── -->
+  <section class="resume-section">
+    <h2 class="section-label">Skills</h2>
+    <div class="skills-block">
+      <div class="skill-row">
+        <span class="skill-category">Technical</span>
+        <div class="skill-tags">
+          {['Python', 'C++', 'ROS1', 'ROS2', 'GDB', 'OpenVino', 'VTune', 'Grafana', 'Git', 'Docker'].map(s => (
+            <span class="skill-tag">{s}</span>
+          ))}
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-category">Languages</span>
+        <div class="skill-tags">
+          {['English', 'Tamil', 'Sanskrit'].map(s => (
+            <span class="skill-tag">{s}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<style>
+  /* ── Page header ── */
+  .page-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  .download-btn {
+    font-size: 0.8125rem;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    padding: 0.35em 0.85em;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .download-btn:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* ── Sections ── */
+  .resume-section {
+    margin-bottom: 3rem;
+  }
+
+  .section-label {
+    font-size: 0.6875rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── Employer blocks ── */
+  .employer {
+    margin-bottom: 2.25rem;
+  }
+
+  .employer-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .employer-header h2,
+  .employer-header h3 {
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .employer-dates {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── Role entries ── */
+  .role {
+    margin-bottom: 1.25rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--border);
+  }
+
+  .role-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .role-title {
+    font-size: 0.9375rem;
+    font-style: italic;
+    color: var(--fg);
+  }
+
+  .role-dates {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .role ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .role li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ── Education ── */
+  .edu-entry {
+    margin-bottom: 1.25rem;
+  }
+
+  .edu-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .edu-school {
+    font-size: 1rem;
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+    color: var(--fg);
+  }
+
+  .edu-dates {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .edu-degree {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  /* ── Skills ── */
+  .skills-block {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .skill-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .skill-category {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    width: 6rem;
+    flex-shrink: 0;
+    padding-top: 0.25rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .skill-tag {
+    font-size: 0.8125rem;
+    font-family: var(--font-mono);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.2em 0.6em;
+    color: var(--fg);
+  }
+
+  /* ── Involvement ── */
+  .involvement-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ── Achievements ── */
+  .achievements-list {
+    list-style: disc;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .achievements-list li {
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+</style>
+</BaseLayout>
