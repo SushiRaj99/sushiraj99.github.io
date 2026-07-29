@@ -12,4 +12,15 @@ const gifts = defineCollection({
   }),
 });
 
-export const collections = { gifts };
+const projects = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    images: z.array(z.string()).optional(),
+    date: z.coerce.date().optional(),
+    tools: z.array(z.string()).optional(),
+  }),
+});
+
+export const collections = { gifts, projects };

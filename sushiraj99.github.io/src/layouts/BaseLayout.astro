@@ -288,4 +288,71 @@ const pageTitle = title === 'Sushant Raj' ? title : `${title} — Sushant Raj`;
     font-family: var(--font-mono);
     margin-top: 0.5rem;
   }
+
+  /* ── Project image slider ── */
+  .slider {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .slider__track {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: #000;
+  }
+
+  .slider__img-wrap {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .slider__img-wrap--empty {
+    background: var(--card-bg);
+  }
+
+  .slider__img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .slider__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    background: var(--card-bg);
+  }
+
+  .slider__nav button {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.2em 0.6em;
+    font-size: 0.875rem;
+    cursor: pointer;
+    color: var(--fg);
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .slider__nav button:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .slider__nav button:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .slider__counter {
+    font-size: 0.8125rem;
+    font-family: var(--font-mono);
+    color: var(--muted);
+    min-width: 3rem;
+    text-align: center;
+  }
 </style>
