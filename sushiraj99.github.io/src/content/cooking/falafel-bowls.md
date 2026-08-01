@@ -39,7 +39,7 @@ time: 1 hour
 
 |          |     |
 | -------- | --- |
-| Calories | 748 |
+| Calories | 759 |
 | Protein  | 35g |
 | Fat      | 32g |
 | Carbs    | 87g |
