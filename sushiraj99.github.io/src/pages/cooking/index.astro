@@ -1,0 +1,136 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const recipes = (await getCollection('cooking'))
+  .sort((a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0));
+---
+
+<BaseLayout title="Cooking" description="Recipes and notes from the kitchen.">
+  <div class="page-header">
+    <h1>Cooking</h1>
+  </div>
+
+  <p class="intro">
+    Turns out living on your own means you need to learn to cook. Or just get used to eating your own terrible food. 
+    Here's a few things I've started making. Disclaimer - the calorie/protien numbers are things I had Claude estimate 
+    after feeding it the recipe.
+  </p>
+
+  <div class="recipe-grid">
+    {recipes.map(recipe => (
+      <a href={`/cooking/${recipe.id}`} class="recipe-card">
+        {recipe.data.images?.[0] && (
+          <div class="recipe-card__img-wrap">
+            <img src={recipe.data.images[0]} alt={recipe.data.title} />
+          </div>
+        )}
+        <div class="recipe-card__body">
+          <h3>{recipe.data.title}</h3>
+          <p class="recipe-card__desc">{recipe.data.description}</p>
+          <div class="recipe-card__meta">
+            {recipe.data.time && <span>{recipe.data.time}</span>}
+            {recipe.data.servings && <span>Serves {recipe.data.servings}</span>}
+            {recipe.data.calories && <span>{recipe.data.calories} cal</span>}
+            {recipe.data.protein && <span>{recipe.data.protein}g protein</span>}
+          </div>
+        </div>
+      </a>
+    ))}
+    {recipes.length === 0 && <p class="empty">No recipes yet — check back soon.</p>}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .intro {
+    font-size: 1.0625rem;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 58ch;
+    margin-bottom: 3rem;
+  }
+
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 520px) {
+    .recipe-grid { grid-template-columns: 1fr; }
+  }
+
+  .recipe-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card-bg);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.15s;
+  }
+
+  .recipe-card:hover { border-color: var(--accent); }
+
+  .recipe-card__img-wrap {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--border);
+  }
+
+  .recipe-card__img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .recipe-card:hover .recipe-card__img-wrap img { transform: scale(1.03); }
+
+  .recipe-card__body {
+    padding: 1.125rem 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .recipe-card__body h3 {
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    transition: color 0.15s;
+  }
+
+  .recipe-card:hover h3 { color: var(--accent); }
+
+  .recipe-card__desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .recipe-card__meta {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .recipe-card__meta span {
+    font-size: 0.775rem;
+    font-family: var(--font-mono);
+    color: var(--muted);
+  }
+
+  .empty { color: var(--muted); }
+</style>

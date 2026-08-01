@@ -1,0 +1,151 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectImageSlider from '../../components/ProjectImageSlider.jsx';
+
+export async function getStaticPaths() {
+  const recipes = await getCollection('cooking');
+  return recipes.map(recipe => ({
+    params: { slug: recipe.id },
+    props: { recipe },
+  }));
+}
+
+const { recipe } = Astro.props;
+const { Content } = await render(recipe);
+const { title, description, time, servings, calories, protein, images, tags } = recipe.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="recipe-header">
+    <a href="/cooking" class="back-link">← Cooking</a>
+    <h1>{title}</h1>
+    <p class="recipe-desc">{description}</p>
+
+    {(time || servings || calories || protein) && (
+      <div class="recipe-meta">
+        {time && (
+          <div class="meta-item">
+            <span class="meta-label">Time</span>
+            <span class="meta-value">{time}</span>
+          </div>
+        )}
+        {servings && (
+          <div class="meta-item">
+            <span class="meta-label">Serves</span>
+            <span class="meta-value">{servings}</span>
+          </div>
+        )}
+        {calories && (
+          <div class="meta-item">
+            <span class="meta-label">Calories</span>
+            <span class="meta-value">{calories} cal</span>
+          </div>
+        )}
+        {protein && (
+          <div class="meta-item">
+            <span class="meta-label">Protein</span>
+            <span class="meta-value">{protein}g</span>
+          </div>
+        )}
+      </div>
+    )}
+  </div>
+
+  {images && images.length > 0 && (
+    <div class="recipe-slider">
+      <ProjectImageSlider images={images} title={title} client:load />
+    </div>
+  )}
+
+  <div class="prose recipe-body">
+    <Content />
+  </div>
+
+  {tags && tags.length > 0 && (
+    <div class="recipe-tags">
+      {tags.map(tag => <span>{tag}</span>)}
+    </div>
+  )}
+</BaseLayout>
+
+<style>
+  .recipe-header {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: color 0.15s;
+  }
+
+  .back-link:hover { color: var(--accent); }
+
+  .recipe-header h1 { margin-bottom: 0.5rem; }
+
+  .recipe-desc {
+    font-size: 1.0625rem;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 52ch;
+    margin-bottom: 1.25rem;
+  }
+
+  .recipe-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .meta-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-value {
+    font-size: 1rem;
+    font-family: var(--font-serif);
+    color: var(--fg);
+  }
+
+  .recipe-slider {
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+
+  .recipe-body { margin-bottom: 2rem; }
+
+  .recipe-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .recipe-tags span {
+    font-size: 0.8125rem;
+    font-family: var(--font-mono);
+    color: var(--muted);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.2em 0.6em;
+  }
+</style>

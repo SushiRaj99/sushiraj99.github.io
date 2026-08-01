@@ -27,6 +27,10 @@ const projects = await Promise.all(
     but most of the things I make are usually gifts or just for fun.
   </p>
 
+  <div class="subpages">
+    <a href="/projects/gifts" class="subpage-link">Favorite Gifts →</a>
+  </div>
+
   <div class="projects-grid">
     {projects.map(project => (
       <article class="project-card">
@@ -51,10 +55,6 @@ const projects = await Promise.all(
         </div>
       </article>
     ))}
-  </div>
-
-  <div class="subpages">
-    <a href="/projects/gifts" class="subpage-link">Favorite Gifts →</a>
   </div>
 </BaseLayout>
 
@@ -145,8 +145,8 @@ const projects = await Promise.all(
   .subpages {
     display: flex;
     gap: 1rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
   }
 
   .subpage-link {
