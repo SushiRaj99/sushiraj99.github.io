@@ -25,7 +25,7 @@ time: 1 hour
 - ½ large avocado
 - 1 cup low-fat (1%) cottage cheese
 
-## Method
+## Instructions
 
 1. **Cook the Lentils** - Rinse the black and red lentils together, then simmer in water until tender (~25 - 30 min).
 2. **Air Fry the Falafel** - I usually do 8 minutes at 350°F
